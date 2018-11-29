@@ -15,6 +15,8 @@ import net.capsulestudio.mvpmindorkspractice.data.DataManager;
 import net.capsulestudio.mvpmindorkspractice.ui.main.MainActivity;
 import net.capsulestudio.mvpmindorkspractice.utils.CommonUtils;
 
+import es.dmoral.toasty.Toasty;
+
 public class LoginActivity extends AppCompatActivity implements LoginMvpView{
 
     EditText etEmail, etPassword;
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpView{
 
     @Override
     public void openMainActivity() {
+        Toasty.success(this, "Login Successful", Toast.LENGTH_LONG).show();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
@@ -59,22 +62,22 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpView{
         String password = etPassword.getText().toString();
 
         if (!CommonUtils.isEmailValid(email)) {
-            Toast.makeText(this, "Enter correct Email", Toast.LENGTH_LONG).show();
+            Toasty.error(this, "Enter correct Email", Toast.LENGTH_LONG).show();
             return;
          }
 
          if (password.length()<=6){
-             Toast.makeText(this, "Password Length Must be greater than 6", Toast.LENGTH_LONG).show();
+             Toasty.error(this, "Password Length Must be greater than 6", Toast.LENGTH_LONG).show();
              return;
          }
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Email Must Not Be Empty !", Toast.LENGTH_LONG).show();
+            Toasty.error(this, "Email Must Not Be Empty !", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Password Must Not Be Empty !", Toast.LENGTH_LONG).show();
+            Toasty.error(this, "Password Must Not Be Empty !", Toast.LENGTH_LONG).show();
             return;
         }
 
